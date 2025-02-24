@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Wonders Image Slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+        }
+        img {
+            width: 100%;
+            display: block;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: gray;
+            display: inline-block;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .active {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="https://i.natgeofe.com/n/819ea774-aa80-435e-af5a-ae56efee7ce3/92491_4x3.jpg" alt="Machu Picchu"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/250px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg" alt="Great Wall of China"></div>
+            <div class="slide"><img src="https://cdn.britannica.com/88/189788-050-9B5DB3A4/Al-Dayr-Petra-Jordan.jpg" alt="Petra"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg" alt="Colosseum"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/640px-Taj_Mahal_%28Edited%29.jpeg" alt="Taj Mahal"></div>
+            <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/1200px-Christ_the_Redeemer_-_Cristo_Redentor.jpg" alt="Christ the Redeemer"></div>
+            <div class="slide"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNQnA1o_CO3uxMmupNeCeKN5-HdqOH4PrgdA&s" alt="Chichen Itza"></div>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        
+        function moveSlide(n) {
+            index += n;
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            updateSlider();
+        }
+        
+        function currentSlide(n) {
+            index = n;
+            updateSlider();
+        }
+        
+        function updateSlider() {
+            document.querySelector(".slider").style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove("active"));
+            dots[index]?.classList.add("active");
+        }
+        
+        
+        updateSlider();
+    </script>
+</body>
+</html>
